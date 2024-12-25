@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/styles.css">
+  <title>Folder Color Changer</title>
+</head>
+<body>
+  <div class="onboarding-popup" id="onboarding-popup">
+    <div class="popup-content">
+      <h2>Welcome to Folder Color Changer!</h2>
+      <p>Select a folder, pick a color, and apply the change with ease.</p>
+      <button id="close-popup">Got It!</button>
+    </div>
+  </div>
+
+  <header>
+    <h1>Folder Color Changer</h1>
+  </header>
+
+  <main>
+    <section class="folder-input">
+      <label for="folder-path">Select Folder:</label>
+      <input type="text" id="folder-path" placeholder="Enter folder path or browse">
+      <button id="browse-button">Browse</button>
+    </section>
+
+    <section class="color-picker">
+      <label for="color">Pick a Color:</label>
+      <input type="color" id="color-picker" value="#ff0000">
+    </section>
+
+    <section class="preview">
+      <h3>Folder Preview</h3>
+      <div class="folder-icon" id="folder-preview"></div>
+    </section>
+
+    <section class="actions">
+      <button id="apply-button">Apply</button>
+      <button id="reset-button">Reset</button>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

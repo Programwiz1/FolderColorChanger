@@ -1,0 +1,156 @@
+/* General Styles */ 
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  text-align: center;
+}
+
+/* Header */
+header {
+  background-color: #4caf50;
+  color: white;
+  padding: 20px 0;
+  font-size: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Main Content */
+main {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 500px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Input Section */
+.folder-input,
+.color-picker,
+.actions {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="color"] {
+  width: calc(100% - 10px);
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Folder Preview Section */
+.preview {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.folder-icon {
+  width: 100px;
+  height: 100px;
+  margin: 10px auto;
+  background-image: url("../assets/folder-icon.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10%;
+  border: 1px solid #ccc;
+  position: relative;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Overlay for color changes */
+.folder-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-color, #ff0000); /* Default red color */
+  opacity: 0.7; /* Adjust opacity to blend with the folder icon */
+  pointer-events: none; /* Prevent interaction with the overlay */
+  border-radius: 10%; /* Match the folder icon's shape */
+}
+
+/* Onboarding Popup */
+.onboarding-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.onboarding-popup.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Styling for Hidden File Input */
+input[type="file"] {
+  display: none; /* Hide the file input */
+}
+
+/* Styling for Browse Button */
+button#browse-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button#browse-button:hover {
+  background-color: #45a049;
+}
