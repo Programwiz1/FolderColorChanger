@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+*.env
+folder-color-env/
+
+# Node.js
+node_modules/
+
+# IDEs
+.vscode/
