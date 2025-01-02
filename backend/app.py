@@ -1,11 +1,13 @@
 import os
+import pythoncom
 import win32com.client
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from PIL import Image, ImageDraw
 
 
 app = Flask(__name__)
-
+CORS(app)
 # Test route
 @app.route('/test', methods=['GET'])
 def test():
@@ -41,7 +43,8 @@ def apply_folder_color(folder_path, color):
     and setting a custom folder icon.
     """
     print(f"Applying folder color. Folder path: {folder_path}, Color: {color}")
-
+    pythoncom.CoInitialize() 
+    
     shell = win32com.client.Dispatch("WScript.Shell")
     desktop_ini_path = os.path.join(folder_path, "desktop.ini")
     icon_path = generate_colored_icon(folder_path, color)
@@ -63,30 +66,46 @@ def apply_folder_color(folder_path, color):
     print("Folder attributes updated.")
 
 
-def generate_colored_icon(folder_path, color):
+def generate_colored_icon(folder_path, color_hex):
     """
-    Generate a colored folder icon and save it as an .ico file.
+    Generate a tinted folder icon from folder_template.png
+    and save it as an .ico file.
     """
-    print(f"Generating icon for color: {color}")
-
-    # Convert color from hex to RGB
-    color = color.lstrip("#")
-    rgb_color = tuple(int(color[i:i+2], 16) for i in (0, 2, 4))
+    import os
+    from PIL import Image
+    # Convert color from hex (#RRGGBB) to an (R, G, B) tuple
+    color_hex = color_hex.lstrip("#")
+    rgb_color = tuple(int(color_hex[i:i+2], 16) for i in (0, 2, 4))
     print(f"RGB color: {rgb_color}")
 
-    # Create an image for the icon
-    icon_size = (256, 256)  # Icon size
-    img = Image.new("RGB", icon_size, rgb_color)
+    # Build a path to the PNG template relative to this file
+    base_path = os.path.join(
+        os.path.dirname(__file__),  # backend/
+        "..",                       # up one level => FolderColorChanger/
+        "frontend", "assets", "folder_template.png"
+    )
+    print(f"Loading base folder icon from: {base_path}")
 
-    # Save the image as an .ico file
+    # Load the base PNG as RGBA (so we keep transparency)
+    base_img = Image.open(base_path).convert("RGBA")
+
+    # Create an overlay in the chosen color, same size as base
+    # giving full opacity (255 in alpha channel)
+    overlay = Image.new("RGBA", base_img.size, rgb_color + (255,))
+
+    # Alpha-composite: overlay color onto the original image
+    # This tints the folder shape with your chosen color
+    tinted_img = Image.alpha_composite(base_img, overlay)
+
+    # Now save it as an .ICO file in the target folder
+    # The multiple sizes param ensures the .ico has several resolutions
     icon_path = os.path.join(folder_path, "folder_icon.ico")
-    try:
-        img.save(icon_path, format="ICO")
-        print(f"Icon saved at: {icon_path}")
-    except Exception as e:
-        print(f"Error saving icon: {e}")
+    tinted_img.save(icon_path, format="ICO",
+                    sizes=[(16,16), (32,32), (48,48), (64,64), (128,128), (256,256)])
+    print(f"Icon saved at: {icon_path}")
 
     return icon_path
+
 
 
 

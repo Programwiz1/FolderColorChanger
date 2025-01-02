@@ -1,0 +1,27 @@
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffc257;
+      }
+      .cls-2 {
+        fill: #ff9b59;
+      }
+    </style>
+  </defs>
+  <g transform="scale(-1, 1) translate(-360, 0)">
+    <path
+      class="cls-2"
+      d="M322.5,54h-70c-11.05,0-20,8.95-20,20v7H37.5c-11.05,0-20,8.95-20,20v185c0,11.05,8.95,20,20,20h285c11.05,0,20-8.95,20-20V74c0-11.05-8.95-20-20-20Z"
+    />
+    <rect
+      class="cls-1"
+      x="17.5"
+      y="108"
+      width="325"
+      height="198"
+      rx="18.76"
+      ry="18.76"
+    />
+  </g>
+</svg>

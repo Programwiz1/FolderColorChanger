@@ -14,11 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
 // Folder Preview Logic
 const colorPicker = document.getElementById("color-picker");
 const folderPreview = document.getElementById("folder-preview");
+const svgPath = folderPreview.querySelector(".cls-2"); // Target the SVG path for color updates
+const svgRect = folderPreview.querySelector(".cls-1"); // Optional: Target other SVG parts if needed
 
+// Update the SVG dynamically as the user slides the color picker
 colorPicker.addEventListener("input", () => {
   const selectedColor = colorPicker.value;
-  // Update the overlay color
-  folderPreview.style.setProperty("--overlay-color", selectedColor);
+  // Update the color of the SVG parts
+  svgPath.style.fill = selectedColor;
+  svgRect.style.fill = selectedColor; // Optional: Update other parts of the SVG
 });
 
 // Apply Button
@@ -61,6 +65,8 @@ document.getElementById("reset-button").addEventListener("click", () => {
   document.getElementById("folder-path").value = "";
   colorPicker.value = "#ff0000";
   folderPreview.style.setProperty("--overlay-color", "#ff0000"); // Reset to default red
+  svgPath.style.fill = "#ff0000"; // Reset SVG path color to default
+  svgRect.style.fill = "#ffc257"; // Reset SVG rect color to default
   alert("Settings reset to default.");
 });
 
